@@ -1,6 +1,5 @@
 package com.blame.gdaxAPIClient.signer;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -22,7 +21,7 @@ public class SignableResource {
 	private static final Logger logger = LogManager.getLogger(SignableResource.class);
 	
 	protected static final String PROPERTIES_FILENAME = "gdax_api_key.properties";
-	protected static final SimpleDateFormat ISO_8601_DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+	protected static final SimpleDateFormat ISO_8601_DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS000'Z'");
 	static {
 		ISO_8601_DATEFORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
 	}
@@ -44,7 +43,9 @@ public class SignableResource {
 		Properties properties = new Properties();
 		InputStream input = null;
 		try {
-			properties.load(new FileInputStream(PROPERTIES_FILENAME));
+			//input = new FileInputStream(PROPERTIES_FILENAME);
+    		input = getClass().getClassLoader().getResourceAsStream(PROPERTIES_FILENAME);
+			properties.load(input);
 			key = properties.getProperty("gdax.api.key");
 			secret = properties.getProperty("gdax.api.secret");
 			passphrase = properties.getProperty("gdax.api.passphrase");
