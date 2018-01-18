@@ -15,7 +15,7 @@ public class AccountsResource extends SignableResource {
 	protected static final String RESOURCE_PATH_ACCOUNTS = "accounts";
 	
 	public AccountsResource() {
-		super();
+		super(RESOURCE_PATH_ACCOUNTS);
 
 		logger.info("Building resource for " + this.getClass().getSimpleName() + " ...");
 		ib = ClientBuilder
@@ -24,7 +24,11 @@ public class AccountsResource extends SignableResource {
 				.path(RESOURCE_PATH_ACCOUNTS)
 				.request(MediaType.APPLICATION_JSON);
 		
-		super.sign();
+		super.signGet();
 	}
 
+	public String get() {
+		logger.info("Sending GET request over the resource...");
+		return ib.get().readEntity(String.class);
+	}
 }
