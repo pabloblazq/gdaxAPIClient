@@ -2,7 +2,6 @@ package com.blame.gdaxAPIClient;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 import java.util.TimeZone;
 
 public class Test {

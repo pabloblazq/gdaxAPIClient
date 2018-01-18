@@ -3,10 +3,9 @@ package com.blame.gdaxAPIClient.signer;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Base64.Encoder;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Properties;
 import java.util.TimeZone;
 
@@ -21,10 +20,10 @@ public class SignableResource {
 	private static final Logger logger = LogManager.getLogger(SignableResource.class);
 	
 	protected static final String PROPERTIES_FILENAME = "gdax_api_key.properties";
-	protected static final SimpleDateFormat ISO_8601_DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS000'Z'");
-	static {
-		ISO_8601_DATEFORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
-	}
+//	protected static final SimpleDateFormat ISO_8601_DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS000'Z'");
+//	static {
+//		ISO_8601_DATEFORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
+//	}
 			
 	protected String key;
 	protected String secret;
@@ -91,8 +90,7 @@ public class SignableResource {
 	}
 
 	private String generateTimestamp() {
-		Date dateToSign = new Date();
-		return ISO_8601_DATEFORMAT.format(dateToSign);
+		return Long.toString(Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTime().getTime()/1000);
 	}
 
 	protected String calculateSign(String timestamp, String method, String resourcePath) throws IllegalStateException, UnsupportedEncodingException {
