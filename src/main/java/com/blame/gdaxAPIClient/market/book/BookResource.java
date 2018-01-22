@@ -7,7 +7,7 @@ import javax.ws.rs.core.MediaType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.blame.gdaxAPIClient.GDAXAPIConstants;
+import com.blame.gdaxAPIClient.GdaxAPIConstants;
 
 public class BookResource {
 	private static final Logger logger = LogManager.getLogger(BookResource.class);
@@ -38,7 +38,7 @@ public class BookResource {
 		logger.info("Building resource for " + this.getClass().getSimpleName() + " ...");
 		ib = ClientBuilder
 				.newClient()
-				.target(GDAXAPIConstants.GDAX_API_ENDPOINT_URL)
+				.target(GdaxAPIConstants.GDAX_API_ENDPOINT_URL)
 				.path(RESOURCE_PATH_PRODUCTS).path(product).path(RESOURCE_PATH_BOOK)
 				.queryParam("level", detailLevel.getMask())
 				.request(MediaType.APPLICATION_JSON);

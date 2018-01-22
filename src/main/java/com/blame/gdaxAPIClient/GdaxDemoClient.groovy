@@ -5,7 +5,7 @@ import com.blame.gdaxAPIClient.market.book.BookResource
 import com.blame.gdaxAPIClient.time.TimeResource
 import groovy.json.JsonSlurper
 
-class GDAXDemoClient {
+class GdaxDemoClient {
 
 	static main(args) {
 		def r = new BookResource("BTC-EUR", BookResource.DetailLevel.LEVEL_3)

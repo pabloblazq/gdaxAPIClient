@@ -7,7 +7,7 @@ import javax.ws.rs.core.MediaType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.blame.gdaxAPIClient.GDAXAPIConstants;
+import com.blame.gdaxAPIClient.GdaxAPIConstants;
 
 public class TickerResource {
 	private static final Logger logger = LogManager.getLogger(TickerResource.class);
@@ -25,7 +25,7 @@ public class TickerResource {
 		logger.info("Building resource for " + this.getClass().getSimpleName() + " ...");
 		ib = ClientBuilder
 				.newClient()
-				.target(GDAXAPIConstants.GDAX_API_ENDPOINT_URL)
+				.target(GdaxAPIConstants.GDAX_API_ENDPOINT_URL)
 				.path(RESOURCE_PATH_PRODUCTS).path(product).path(RESOURCE_PATH_TICKER)
 				.request(MediaType.APPLICATION_JSON);
 	}

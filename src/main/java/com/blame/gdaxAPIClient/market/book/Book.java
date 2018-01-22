@@ -3,31 +3,31 @@ package com.blame.gdaxAPIClient.market.book;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class BookBean {
+public class Book {
 
 	protected String sequence;
 	
 	protected String[][] bids;
 	protected String[][] asks;
 	
-	protected transient Collection<OrderBean> bidsNormd;
-	protected transient Collection<OrderBean> asksNormd;
+	protected transient Collection<Order> bidsNormd;
+	protected transient Collection<Order> asksNormd;
 	
 	public void normalize() {
-		bidsNormd = new ArrayList<OrderBean>();
+		bidsNormd = new ArrayList<Order>();
 		for(String[] bid : bids) {
 			Float price = Float.parseFloat(bid[0]);
 			Float size = Float.parseFloat(bid[1]);
 			int numOrders = Integer.parseInt(bid[2]);
-			bidsNormd.add(new OrderBean(price, size, numOrders));
+			bidsNormd.add(new Order(price, size, numOrders));
 		}
 			
-		asksNormd = new ArrayList<OrderBean>();
+		asksNormd = new ArrayList<Order>();
 		for(String[] ask : asks) {
 			Float price = Float.parseFloat(ask[0]);
 			Float size = Float.parseFloat(ask[1]);
 			int numOrders = Integer.parseInt(ask[2]);
-			asksNormd.add(new OrderBean(price, size, numOrders));
+			asksNormd.add(new Order(price, size, numOrders));
 		}
 		
 	}
