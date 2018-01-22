@@ -1,17 +1,19 @@
 package com.blame.gdaxAPIClient;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
+import com.blame.gdaxAPIClient.market.book.BookBean;
+import com.blame.gdaxAPIClient.market.book.BookResource;
+import com.google.gson.Gson;
 
 public class Test {
 
 	public static void main(String[] args) {
-		SimpleDateFormat ISO_8601_DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS000'Z'");
-		ISO_8601_DATEFORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
-		Date dateToSign = new Date();
-		String timestamp = ISO_8601_DATEFORMAT.format(dateToSign);
-		System.out.println(timestamp);
+
+		BookResource r = new BookResource("BTC-EUR", BookResource.DetailLevel.LEVEL_2);
+		Gson gson = new Gson();
+		BookBean bb = gson.fromJson(r.get(), BookBean.class);
+		bb.normalize();
+		
+		System.out.println(bb);
 	}
 
 }

@@ -46,6 +46,7 @@ public class BookResource {
 	
 	public String get() {
 		logger.info("Sending GET request over the resource...");
-		return ib.get().readEntity(String.class);
+		String sResponse = ib.get().readEntity(String.class);
+		return sResponse;
 	}
 }
