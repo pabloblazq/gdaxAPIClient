@@ -1,4 +1,4 @@
-package com.blame.gdaxAPIClient.market.trades;
+package com.blame.gdax.api.market.trades;
 
 import com.google.gson.annotations.SerializedName;
 

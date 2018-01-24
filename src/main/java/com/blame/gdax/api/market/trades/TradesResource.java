@@ -1,4 +1,4 @@
-package com.blame.gdaxAPIClient.market.trades;
+package com.blame.gdax.api.market.trades;
 
 import java.lang.reflect.Type;
 import java.util.Collection;
@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.blame.gdaxAPIClient.GdaxAPIConstants;
+import com.blame.gdax.api.GdaxAPIConstants;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

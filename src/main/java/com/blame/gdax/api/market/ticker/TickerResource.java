@@ -1,4 +1,4 @@
-package com.blame.gdaxAPIClient.market.ticker;
+package com.blame.gdax.api.market.ticker;
 
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation;
@@ -7,7 +7,7 @@ import javax.ws.rs.core.MediaType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.blame.gdaxAPIClient.GdaxAPIConstants;
+import com.blame.gdax.api.GdaxAPIConstants;
 import com.google.gson.Gson;
 
 /**

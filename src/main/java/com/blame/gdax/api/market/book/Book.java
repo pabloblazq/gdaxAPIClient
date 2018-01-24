@@ -1,7 +1,9 @@
-package com.blame.gdaxAPIClient.market.book;
+package com.blame.gdax.api.market.book;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
+import com.blame.gdax.api.market.book.BookResource.DetailLevel;
 
 public class Book {
 

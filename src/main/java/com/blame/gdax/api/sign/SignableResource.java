@@ -1,4 +1,4 @@
-package com.blame.gdaxAPIClient.signer;
+package com.blame.gdax.api.sign;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,7 +16,7 @@ import javax.ws.rs.client.Invocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.blame.gdaxAPIClient.exception.GdaxAPIClientException;
+import com.blame.gdax.api.exception.GdaxAPIClientException;
 
 public class SignableResource {
 	private static final Logger logger = LogManager.getLogger(SignableResource.class);

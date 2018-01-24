@@ -1,4 +1,4 @@
-package com.blame.gdaxAPIClient;
+package com.blame.gdax.api;
 
 public class GdaxAPIConstants {
 

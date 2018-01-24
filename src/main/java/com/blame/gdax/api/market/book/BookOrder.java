@@ -1,4 +1,4 @@
-package com.blame.gdaxAPIClient.market.book;
+package com.blame.gdax.api.market.book;
 
 public class BookOrder {
 

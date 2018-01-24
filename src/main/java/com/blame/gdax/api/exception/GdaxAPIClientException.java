@@ -1,4 +1,4 @@
-package com.blame.gdaxAPIClient.exception;
+package com.blame.gdax.api.exception;
 
 public class GdaxAPIClientException extends Exception {
 

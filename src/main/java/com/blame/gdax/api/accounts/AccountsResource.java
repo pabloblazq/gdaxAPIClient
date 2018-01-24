@@ -1,4 +1,4 @@
-package com.blame.gdaxAPIClient.accounts;
+package com.blame.gdax.api.accounts;
 
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
@@ -6,9 +6,9 @@ import javax.ws.rs.core.MediaType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.blame.gdaxAPIClient.GdaxAPIConstants;
-import com.blame.gdaxAPIClient.exception.GdaxAPIClientException;
-import com.blame.gdaxAPIClient.signer.SignableResource;
+import com.blame.gdax.api.GdaxAPIConstants;
+import com.blame.gdax.api.exception.GdaxAPIClientException;
+import com.blame.gdax.api.sign.SignableResource;
 
 public class AccountsResource extends SignableResource {
 	private static final Logger logger = LogManager.getLogger(AccountsResource.class);
