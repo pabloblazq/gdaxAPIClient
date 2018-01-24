@@ -1,57 +1,45 @@
 package com.blame.gdax.api.market.book;
 
-import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation;
-import javax.ws.rs.core.MediaType;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.blame.gdax.resource.Resource;
 
-import com.blame.gdax.api.GdaxAPIConstants;
-import com.google.gson.Gson;
-
-public class BookResource {
-	private static final Logger logger = LogManager.getLogger(BookResource.class);
+public class BookResource extends Resource {
 	
 	protected static final String RESOURCE_PATH_PRODUCTS = "products";
 	protected static final String RESOURCE_PATH_BOOK = "book";
 	
-	protected Invocation.Builder ib;
+	protected Invocation.Builder invocationBuilder;
 	protected String product;
 	protected DetailLevel detailLevel;
 	
-	protected Gson gson = new Gson();
-
 	public enum DetailLevel {
-		LEVEL_1(1), LEVEL_2(2), LEVEL_3(3);
+		LEVEL_1("1"), LEVEL_2("2"), LEVEL_3("3");
 		
-		private final int mask;
-	    private DetailLevel(int mask) {
+		private final String mask;
+	    private DetailLevel(String mask) {
 	        this.mask = mask;
 	    }
 
-	    public int getMask() {
+	    public String getMask() {
 	        return mask;
 	    }
 	}
 
 	public BookResource(String product, DetailLevel detailLevel) {
-		super();
+		super(new StringBuilder(RESOURCE_PATH_PRODUCTS).append("/").append(product).append("/").append(RESOURCE_PATH_BOOK).toString());
 
-		logger.info("Building resource for " + this.getClass().getSimpleName() + " ...");
 		this.product = product;
 		this.detailLevel = detailLevel;
-		ib = ClientBuilder
-				.newClient()
-				.target(GdaxAPIConstants.GDAX_API_ENDPOINT_URL)
-				.path(RESOURCE_PATH_PRODUCTS).path(product).path(RESOURCE_PATH_BOOK)
-				.queryParam("level", detailLevel.getMask())
-				.request(MediaType.APPLICATION_JSON);
+		invocationBuilder = getInvocationBuilder("level", detailLevel.getMask());
 	}
 	
 	public Book getBook() {
-		logger.info("Sending GET request over the resource...");
-		String sResponse = ib.get().readEntity(String.class);
-		return gson.fromJson(sResponse, Book.class).normalize(detailLevel);
+		logger.info("Getting book of orders ...");
+		String sResponse = invocationBuilder.get().readEntity(String.class);
+		logger.debug("Transforming GDAX response into Book object ...");
+		Book b = gson.fromJson(sResponse, Book.class).normalize(detailLevel);
+		logger.debug("Book object ready.");
+		return b;
 	}
 }
