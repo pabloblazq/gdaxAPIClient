@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.blame.gdaxAPIClient.GdaxAPIConstants;
+import com.google.gson.Gson;
 
 public class BookResource {
 	private static final Logger logger = LogManager.getLogger(BookResource.class);
@@ -17,7 +18,10 @@ public class BookResource {
 	
 	protected Invocation.Builder ib;
 	protected String product;
+	protected DetailLevel detailLevel;
 	
+	protected Gson gson = new Gson();
+
 	public enum DetailLevel {
 		LEVEL_1(1), LEVEL_2(2), LEVEL_3(3);
 		
@@ -33,9 +37,10 @@ public class BookResource {
 
 	public BookResource(String product, DetailLevel detailLevel) {
 		super();
-		this.product = product;
 
 		logger.info("Building resource for " + this.getClass().getSimpleName() + " ...");
+		this.product = product;
+		this.detailLevel = detailLevel;
 		ib = ClientBuilder
 				.newClient()
 				.target(GdaxAPIConstants.GDAX_API_ENDPOINT_URL)
@@ -44,9 +49,9 @@ public class BookResource {
 				.request(MediaType.APPLICATION_JSON);
 	}
 	
-	public String get() {
+	public Book getBook() {
 		logger.info("Sending GET request over the resource...");
 		String sResponse = ib.get().readEntity(String.class);
-		return sResponse;
+		return gson.fromJson(sResponse, Book.class).normalize(detailLevel);
 	}
 }

@@ -8,7 +8,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.blame.gdaxAPIClient.GdaxAPIConstants;
+import com.google.gson.Gson;
 
+/**
+ * TODO: REAL-TIME UPDATES : Polling is discouraged in favor of connecting via the websocket stream and listening for match messages.
+ * 
+ * @author pablo.blazquez
+ */
 public class TickerResource {
 	private static final Logger logger = LogManager.getLogger(TickerResource.class);
 	
@@ -17,6 +23,8 @@ public class TickerResource {
 	
 	protected Invocation.Builder ib;
 	protected String product;
+
+	protected Gson gson = new Gson();
 
 	public TickerResource(String product) {
 		super();
@@ -30,8 +38,9 @@ public class TickerResource {
 				.request(MediaType.APPLICATION_JSON);
 	}
 	
-	public String get() {
+	public Ticker getTicker() {
 		logger.info("Sending GET request over the resource...");
-		return ib.get().readEntity(String.class);
+		String sResponse = ib.get().readEntity(String.class);
+		return gson.fromJson(sResponse, Ticker.class);
 	}
 }

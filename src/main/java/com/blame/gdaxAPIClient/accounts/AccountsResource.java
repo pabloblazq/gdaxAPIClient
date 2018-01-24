@@ -28,7 +28,7 @@ public class AccountsResource extends SignableResource {
 		super.signGet();
 	}
 
-	public String get() {
+	public String getAccounts() {
 		logger.info("Sending GET request over the resource...");
 		return ib.get().readEntity(String.class);
 	}
