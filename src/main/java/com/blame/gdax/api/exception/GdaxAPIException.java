@@ -1,10 +1,10 @@
 package com.blame.gdax.api.exception;
 
-public class GdaxAPIClientException extends Exception {
+public class GdaxAPIException extends Exception {
 
 	private static final long serialVersionUID = 1414203715474069772L;
 
-	public GdaxAPIClientException(Exception e) {
+	public GdaxAPIException(Exception e) {
 		super(e);
 	}
 

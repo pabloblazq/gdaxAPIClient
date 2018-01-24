@@ -7,7 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.blame.gdax.api.GdaxAPIConstants;
-import com.blame.gdax.api.exception.GdaxAPIClientException;
+import com.blame.gdax.api.exception.GdaxAPIException;
 import com.blame.gdax.api.sign.SignableResource;
 
 public class AccountsResource extends SignableResource {
@@ -15,7 +15,7 @@ public class AccountsResource extends SignableResource {
 
 	protected static final String RESOURCE_PATH_ACCOUNTS = "accounts";
 	
-	public AccountsResource() throws GdaxAPIClientException {
+	public AccountsResource() throws GdaxAPIException {
 		super(RESOURCE_PATH_ACCOUNTS);
 
 		logger.info("Building resource for " + this.getClass().getSimpleName() + " ...");

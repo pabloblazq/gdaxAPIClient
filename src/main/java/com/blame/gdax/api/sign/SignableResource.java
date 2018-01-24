@@ -16,7 +16,7 @@ import javax.ws.rs.client.Invocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.blame.gdax.api.exception.GdaxAPIClientException;
+import com.blame.gdax.api.exception.GdaxAPIException;
 
 public class SignableResource {
 	private static final Logger logger = LogManager.getLogger(SignableResource.class);
@@ -36,17 +36,17 @@ public class SignableResource {
 	protected Invocation.Builder ib;
 	protected String resourcePath;
 
-	public SignableResource(String resourcePath) throws GdaxAPIClientException {
+	public SignableResource(String resourcePath) throws GdaxAPIException {
 		super();
 		
 		logger.info("Initializing objects to perform the signing ...");
 		this.resourcePath = resourcePath;
 		
-		Properties properties = new Properties();
 		InputStream input = null;
 		try {
 			//input = new FileInputStream(PROPERTIES_FILENAME);
     		input = getClass().getClassLoader().getResourceAsStream(PROPERTIES_FILENAME);
+    		Properties properties = new Properties();
 			properties.load(input);
 			key = properties.getProperty("gdax.api.key");
 			secret = properties.getProperty("gdax.api.secret");
@@ -64,7 +64,7 @@ public class SignableResource {
 		catch (Exception e) {
 			logger.error("Unable to initialize the " + SignableResource.class.getSimpleName() + " object: " + e.toString());
 			e.printStackTrace();
-			throw new GdaxAPIClientException(e);
+			throw new GdaxAPIException(e);
 		} 
 		finally {
 			if (input != null) {
@@ -75,7 +75,7 @@ public class SignableResource {
 		}
 	}
 
-	public void signGet() throws GdaxAPIClientException {
+	public void signGet() throws GdaxAPIException {
 		
 		ib.header("CB-ACCESS-KEY", this.key);
 		
@@ -90,7 +90,7 @@ public class SignableResource {
 		} catch (Exception e) {
 			logger.error("Unable to sign the message because of: " + e.toString());
 			e.printStackTrace();
-			throw new GdaxAPIClientException(e);
+			throw new GdaxAPIException(e);
 		}
 	}
 
