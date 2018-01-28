@@ -1,12 +1,17 @@
 package com.blame.gdax.test;
 
 
+import java.util.Collection;
+
 import com.blame.gdax.api.accounts.AccountsResource;
 import com.blame.gdax.api.exception.GdaxAPIException;
 import com.blame.gdax.api.market.book.Book;
 import com.blame.gdax.api.market.book.BookResource;
 import com.blame.gdax.api.market.ticker.Ticker;
 import com.blame.gdax.api.market.ticker.TickerResource;
+import com.blame.gdax.api.market.trades.Trade;
+import com.blame.gdax.api.market.trades.TradesResource;
+import com.blame.gdax.simul.MarketSimulator;
 
 public class Test {
 
@@ -14,10 +19,10 @@ public class Test {
 
 		String product = "BTC-EUR";
 		
-		AccountsResource r = new AccountsResource();
-		String o = r.getAccounts();
+		MarketSimulator ms = new MarketSimulator(product);
+		ms.simulate(100);
 		
-		System.out.println(o);
+		return;
 	}
 
 }

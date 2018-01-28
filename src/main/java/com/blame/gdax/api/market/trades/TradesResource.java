@@ -1,11 +1,13 @@
 package com.blame.gdax.api.market.trades;
 
 import java.lang.reflect.Type;
-import java.util.Collection;
+import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.core.Response;
 
+import com.blame.gdax.api.exception.GdaxAPIException;
 import com.blame.gdax.resource.Resource;
 import com.google.gson.reflect.TypeToken;
 
@@ -14,7 +16,7 @@ public class TradesResource extends Resource {
 	protected static final String RESOURCE_PATH_PRODUCTS = "products";
 	protected static final String RESOURCE_PATH_TRADES = "trades";
 
-	protected static Type tradeCollectionType = new TypeToken<Collection<Trade>>(){}.getType();
+	protected static Type tradeCollectionType = new TypeToken<ArrayList<Trade>>(){}.getType();
 
 	protected Invocation.Builder invocationBuilder;
 	protected String product;
@@ -30,7 +32,7 @@ public class TradesResource extends Resource {
 		invocationBuilder = getInvocationBuilder();
 	}
 	
-	public Collection<Trade> getTrades() {
+	public ArrayList<Trade> getTrades() throws GdaxAPIException {
 		logger.info("Getting last trades ...");
 		Response response = invocationBuilder.get();
 
@@ -41,13 +43,14 @@ public class TradesResource extends Resource {
 		String sResponse = response.readEntity(String.class);
 
 		logger.debug("Transforming GDAX response into Collection<Trade> object ...");
-		Collection<Trade> trades = gson.fromJson(sResponse, tradeCollectionType);
+		ArrayList<Trade> trades = gson.fromJson(sResponse, tradeCollectionType);
+		normalizeTrades(trades);
 		
 		logger.debug("Collection<Trade> object ready.");
 		return trades;
 	}
 	
-	public Collection<Trade> getTradesNewer() {
+	public ArrayList<Trade> getTradesNewer() throws GdaxAPIException {
 		logger.info("Getting newer trades ...");
 		Invocation.Builder tempIb = getInvocationBuilder("before", cursorBefore);
 		Response response = tempIb.get();
@@ -59,13 +62,14 @@ public class TradesResource extends Resource {
 		String sResponse = response.readEntity(String.class);
 
 		logger.debug("Transforming GDAX response into Collection<Trade> object ...");
-		Collection<Trade> trades = gson.fromJson(sResponse, tradeCollectionType);
+		ArrayList<Trade> trades = gson.fromJson(sResponse, tradeCollectionType);
+		normalizeTrades(trades);
 		
 		logger.debug("Collection<Trade> object ready.");
 		return trades;
 	}
 
-	public Collection<Trade> getTradesOlder() {
+	public ArrayList<Trade> getTradesOlder() throws GdaxAPIException {
 		logger.info("Getting newer trades ...");
 		Invocation.Builder tempIb = getInvocationBuilder("after", cursorAfter);
 		Response response = tempIb.get();
@@ -78,9 +82,23 @@ public class TradesResource extends Resource {
 		String sResponse = response.readEntity(String.class);
 
 		logger.debug("Transforming GDAX response into Collection<Trade> object ...");
-		Collection<Trade> trades = gson.fromJson(sResponse, tradeCollectionType);
+		ArrayList<Trade> trades = gson.fromJson(sResponse, tradeCollectionType);
+		normalizeTrades(trades);
 		
 		logger.debug("Collection<Trade> object ready.");
 		return trades;
+	}
+	
+	private void normalizeTrades(ArrayList<Trade> trades) throws GdaxAPIException {
+		try {
+			for(Trade trade : trades) {
+				trade.normalize();
+			}
+		} 
+		catch (ParseException e) {
+			logger.error("Unable to normalize the trade list: " + e.toString());
+			e.printStackTrace();
+			throw new GdaxAPIException(e);
+		}
 	}
 }
