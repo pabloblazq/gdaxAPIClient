@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.blame.gdax.api.exception.GdaxAPIException;
+import com.blame.gdax.api.resource.market.book.Book;
 import com.blame.gdax.api.resource.market.book.BookResource;
 import com.blame.gdax.api.resource.market.trades.Trade;
 import com.blame.gdax.api.resource.market.trades.TradesResource;
@@ -47,7 +48,7 @@ public class MarketSimulator {
 	 * @param numberOfSeconds the virtual number of seconds until when we have to generate virtual orders
 	 * @throws GdaxAPIException 
 	 */
-	public void simulate(int numberOfSeconds) throws GdaxAPIException {
+	public void simulate(final int numberOfSeconds) throws GdaxAPIException {
 		logger.info("Starting simulation for market {}. Time to simulate: {} secs.", product, numberOfSeconds);
 		Calendar cal = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 		final long currentMillis = cal.getTimeInMillis();
@@ -86,6 +87,12 @@ public class MarketSimulator {
 		logger.info("Calculated rates:");
 		logger.info("  Buy rate:  {} {}/sec", buyRate, value);
 		logger.info("  Sell rate: {} {}/sec", sellRate, value);
+		
+		// consume book orders second by second
+		Book book = bookResource.getBook();
+		for(int secondOfSimulation = 1; secondOfSimulation <= numberOfSeconds; secondOfSimulation++) {
+			// consume book buy and sell orders using the rates
+		}
 		
 		return;
 	}
