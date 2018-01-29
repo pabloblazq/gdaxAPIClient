@@ -1,10 +1,10 @@
-package com.blame.gdax.api.accounts;
+package com.blame.gdax.api.resource.accounts;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.blame.gdax.api.exception.GdaxAPIException;
-import com.blame.gdax.api.sign.SignableResource;
+import com.blame.gdax.api.resource.sign.SignableResource;
 
 public class AccountsResource extends SignableResource {
 	private static final Logger logger = LogManager.getLogger(AccountsResource.class);

@@ -1,4 +1,4 @@
-package com.blame.gdax.resource;
+package com.blame.gdax.api.resource;
 
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation;
@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.blame.gdax.api.GdaxAPIConstants;
-import com.blame.gdax.api.market.book.BookResource;
+import com.blame.gdax.api.resource.market.book.BookResource;
 import com.google.gson.Gson;
 
 public abstract class Resource {

@@ -8,7 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.blame.gdax.api.exception.GdaxAPIException;
-import com.blame.gdax.api.sign.SignableResource;
+import com.blame.gdax.api.resource.sign.SignableResource;
 
 public class APIManager {
 	private static final Logger logger = LogManager.getLogger(SignableResource.class);

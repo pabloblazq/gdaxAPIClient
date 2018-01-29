@@ -1,4 +1,4 @@
-package com.blame.gdax.api.sign;
+package com.blame.gdax.api.resource.sign;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,7 +14,7 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.ws.rs.client.Invocation;
 
 import com.blame.gdax.api.exception.GdaxAPIException;
-import com.blame.gdax.resource.Resource;
+import com.blame.gdax.api.resource.Resource;
 
 public abstract class SignableResource extends Resource {
 	

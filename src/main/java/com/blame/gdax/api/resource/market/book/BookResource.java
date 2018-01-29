@@ -1,8 +1,8 @@
-package com.blame.gdax.api.market.book;
+package com.blame.gdax.api.resource.market.book;
 
 import javax.ws.rs.client.Invocation;
 
-import com.blame.gdax.resource.Resource;
+import com.blame.gdax.api.resource.Resource;
 
 public class BookResource extends Resource {
 	

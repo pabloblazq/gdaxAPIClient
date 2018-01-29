@@ -1,4 +1,4 @@
-package com.blame.gdax.api.market.book;
+package com.blame.gdax.api.resource.market.book;
 
 import java.util.ArrayList;
 import java.util.Collection;

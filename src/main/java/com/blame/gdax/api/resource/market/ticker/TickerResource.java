@@ -1,4 +1,4 @@
-package com.blame.gdax.api.market.ticker;
+package com.blame.gdax.api.resource.market.ticker;
 
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation;

@@ -6,9 +6,9 @@ import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 import com.blame.gdax.api.exception.GdaxAPIException;
-import com.blame.gdax.api.market.book.BookResource;
 import com.blame.gdax.api.market.trades.Trade;
 import com.blame.gdax.api.market.trades.TradesResource;
+import com.blame.gdax.api.resource.market.book.BookResource;
 
 public class MarketSimulator {
 

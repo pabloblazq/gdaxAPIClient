@@ -8,7 +8,7 @@ import javax.ws.rs.client.Invocation;
 import javax.ws.rs.core.Response;
 
 import com.blame.gdax.api.exception.GdaxAPIException;
-import com.blame.gdax.resource.Resource;
+import com.blame.gdax.api.resource.Resource;
 import com.google.gson.reflect.TypeToken;
 
 public class TradesResource extends Resource {

@@ -1,8 +1,8 @@
-package com.blame.gdax.api.time;
+package com.blame.gdax.api.resource.time;
 
 import javax.ws.rs.client.Invocation;
 
-import com.blame.gdax.resource.Resource;
+import com.blame.gdax.api.resource.Resource;
 
 public class TimeResource extends Resource {
 	protected static final String RESOURCE_PATH_TIME = "time";

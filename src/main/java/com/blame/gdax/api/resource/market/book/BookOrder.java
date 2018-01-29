@@ -1,4 +1,4 @@
-package com.blame.gdax.api.market.book;
+package com.blame.gdax.api.resource.market.book;
 
 public class BookOrder {
 
