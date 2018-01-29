@@ -1,5 +1,9 @@
 TO DO:
   4. Implement the MarketSimulator
+  5. Implement the Order resource, to create/cancel orders
+  6. Detect a big step into the buy book orders in comparison to the sell orders, and if that step is going to be resolved
+     in a short period of time, then place a buy order for a price +0.01 EUR ahead of the big step. Then once it is matched, 
+     immediately after place a sell order for a price +0.30% (this needs to be tested).
   
 DONE:
   1. refactor in order to place all the resources into a api.resource package (including the beans into each folder)
