@@ -1,4 +1,4 @@
-package com.blame.gdax.api.market.trades;
+package com.blame.gdax.api.resource.market.trades;
 
 import java.lang.reflect.Type;
 import java.text.ParseException;
