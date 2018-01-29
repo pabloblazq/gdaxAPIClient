@@ -9,13 +9,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.blame.gdax.api.GdaxAPIConstants;
-import com.blame.gdax.api.resource.market.book.BookResource;
 import com.google.gson.Gson;
 
 public abstract class Resource {
 	protected static Gson gson = new Gson();
 
-	protected Logger logger = LogManager.getLogger(BookResource.class);
+	protected Logger logger;
 
 	protected WebTarget webTarget;
 
@@ -23,7 +22,7 @@ public abstract class Resource {
 		super();
 
 		logger = LogManager.getLogger(this.getClass());
-		logger.info("Building resource for " + this.getClass().getSimpleName() + " ...");
+		logger.info("Building resource for {} ...", this.getClass().getSimpleName());
 		
 		webTarget = ClientBuilder
 				.newClient()

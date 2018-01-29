@@ -31,7 +31,7 @@ public class APIManager {
 			requestsIntervalMs = Integer.parseInt(properties.getProperty("gdax.api.requestInterval"));
 		} 
 		catch (Exception e) {
-			logger.error("Unable to initialize the " + SignableResource.class.getSimpleName() + " object: " + e.toString());
+			logger.error("Unable to initialize the {} object: {}", SignableResource.class.getSimpleName(), e.toString());
 			e.printStackTrace();
 			throw new GdaxAPIException(e);
 		} 

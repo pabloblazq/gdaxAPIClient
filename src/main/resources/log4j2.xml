@@ -23,7 +23,7 @@
 		<Logger name="file-logger" level="info" additivity="false">
 			<AppenderRef ref="file-appender" level="info" />
 		</Logger>
-		<Root level="info" additivity="false">
+		<Root level="debug" additivity="false">
 			<AppenderRef ref="console-appender" />
 		</Root>
 	</Loggers>

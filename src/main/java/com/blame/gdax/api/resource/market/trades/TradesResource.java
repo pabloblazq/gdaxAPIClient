@@ -70,7 +70,7 @@ public class TradesResource extends Resource {
 	}
 
 	public ArrayList<Trade> getTradesOlder() throws GdaxAPIException {
-		logger.info("Getting newer trades ...");
+		logger.info("Getting older trades ...");
 		Invocation.Builder tempIb = getInvocationBuilder("after", cursorAfter);
 		Response response = tempIb.get();
 
@@ -96,7 +96,7 @@ public class TradesResource extends Resource {
 			}
 		} 
 		catch (ParseException e) {
-			logger.error("Unable to normalize the trade list: " + e.toString());
+			logger.error("Unable to normalize the trade list: {}", e.toString());
 			e.printStackTrace();
 			throw new GdaxAPIException(e);
 		}

@@ -1,4 +1,11 @@
-1. refactor in order to place all the resources into a api.resource package (including the beans into each folder)
-2. refactor to make all the *Resource classes to inherit from a Resource (that will centralize the logging initialization)
-3. convert the SignableResource into a Signer initialized only once, and passed to every Resource needing it.
-4. Implement the MarketSimulator
+TO DO:
+  4. Implement the MarketSimulator
+  
+DONE:
+  1. refactor in order to place all the resources into a api.resource package (including the beans into each folder)
+  2. refactor to make all the *Resource classes to inherit from a Resource (that will centralize the logging initialization)
+
+NOT TO DO:
+  3. convert the SignableResource into a Signer initialized only once, and passed to every Resource needing it.
+  Some methods involved are not thread safe. 
+  

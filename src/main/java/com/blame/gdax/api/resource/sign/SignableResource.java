@@ -41,7 +41,7 @@ public abstract class SignableResource extends Resource {
 		logger.info("Initializing objects to perform the signing ...");
 		InputStream input = null;
 		try {
-			logger.debug("Loading GDAX key properties from " + PROPERTIES_FILENAME + " ...");
+			logger.debug("Loading GDAX key properties from {} ...", PROPERTIES_FILENAME);
 			//input = new FileInputStream(PROPERTIES_FILENAME);
     		input = getClass().getClassLoader().getResourceAsStream(PROPERTIES_FILENAME);
     		Properties properties = new Properties();
@@ -62,7 +62,7 @@ public abstract class SignableResource extends Resource {
 			logger.debug("Initialization done.");
 		} 
 		catch (Exception e) {
-			logger.error("Unable to initialize the " + SignableResource.class.getSimpleName() + " object: " + e.toString());
+			logger.error("Unable to initialize the {} object: {}", SignableResource.class.getSimpleName(), e.toString());
 			e.printStackTrace();
 			throw new GdaxAPIException(e);
 		} 
@@ -88,7 +88,7 @@ public abstract class SignableResource extends Resource {
 			String sign = calculateSign(timestamp, "GET", this.resourcePath);
 			invocationBuilder.header("CB-ACCESS-SIGN", sign);
 		} catch (Exception e) {
-			logger.error("Unable to sign the message because of: " + e.toString());
+			logger.error("Unable to sign the message because of: {}", e.toString());
 			e.printStackTrace();
 			throw new GdaxAPIException(e);
 		}
