@@ -31,4 +31,20 @@ public class BookOrder {
 		return orderId;
 	}
 
+	public void setPrice(Float price) {
+		this.price = price;
+	}
+
+	public void setSize(Float size) {
+		this.size = size;
+	}
+
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
+
+	public void setNumOrders(int numOrders) {
+		this.numOrders = numOrders;
+	}
+
 }

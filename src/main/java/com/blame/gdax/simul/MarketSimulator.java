@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.blame.gdax.api.exception.GdaxAPIException;
 import com.blame.gdax.api.resource.market.book.Book;
+import com.blame.gdax.api.resource.market.book.BookOrder;
 import com.blame.gdax.api.resource.market.book.BookResource;
 import com.blame.gdax.api.resource.market.trades.Trade;
 import com.blame.gdax.api.resource.market.trades.TradesResource;
@@ -90,8 +91,24 @@ public class MarketSimulator {
 		
 		// consume book orders second by second
 		Book book = bookResource.getBook();
+		ArrayList<BookOrder> buyOrders = (ArrayList<BookOrder>) book.getBuyOrders().clone();
+		ArrayList<BookOrder> sellOrders = (ArrayList<BookOrder>) book.getSellOrders().clone();
 		for(int secondOfSimulation = 1; secondOfSimulation <= numberOfSeconds; secondOfSimulation++) {
-			// consume book buy and sell orders using the rates
+			// consume book sell orders using the buy rate
+			float remainingBuyRate = buyRate;
+			while(sellOrders.get(0).getSize() < remainingBuyRate) {
+				remainingBuyRate -= sellOrders.get(0).getSize();
+				sellOrders.remove(0);
+			}
+			sellOrders.get(0).setSize(sellOrders.get(0).getSize() - remainingBuyRate);
+
+			// consume book buy orders using the sell rate
+			float remainingSellRate = sellRate;
+			while(buyOrders.get(0).getSize() < remainingSellRate) {
+				remainingSellRate -= buyOrders.get(0).getSize();
+				buyOrders.remove(0);
+			}
+			buyOrders.get(0).setSize(buyOrders.get(0).getSize() - remainingSellRate);
 		}
 		
 		return;

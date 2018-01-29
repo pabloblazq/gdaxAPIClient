@@ -10,8 +10,8 @@ public class Book {
 	protected String[][] bids;
 	protected String[][] asks;
 	
-	protected transient Collection<BookOrder> bidsNormd;
-	protected transient Collection<BookOrder> asksNormd;
+	protected transient ArrayList<BookOrder> bidsNormd;
+	protected transient ArrayList<BookOrder> asksNormd;
 	
 	public Book normalize(BookResource.DetailLevel level) {
 		bidsNormd = new ArrayList<BookOrder>();
@@ -47,4 +47,12 @@ public class Book {
 		return this;
 	}
 	
+	public ArrayList<BookOrder> getSellOrders() {
+		return asksNormd;
+	}
+	
+	public ArrayList<BookOrder> getBuyOrders() {
+		return bidsNormd;
+	}
+
 }
