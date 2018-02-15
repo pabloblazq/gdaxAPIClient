@@ -5,16 +5,17 @@ import javax.ws.rs.client.Invocation;
 import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
 
-import com.blame.gdax.api.resource.Resource;
+import com.blame.gdax.api.exception.GdaxAPIException;
+import com.blame.gdax.api.resource.sign.SignableResource;
 
-public class OrdersResource extends Resource {
+public class OrdersResource extends SignableResource {
 
 	protected static final String RESOURCE_PATH_ORDERS = "orders";
 
 	protected Invocation.Builder invocationBuilder;
 	protected String product;
 
-	public OrdersResource(String resourcePath, String product) {
+	public OrdersResource(String resourcePath, String product) throws GdaxAPIException {
 		super(new StringBuilder(RESOURCE_PATH_ORDERS).toString());
 
 		this.product = product;
